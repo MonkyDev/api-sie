@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateGeneracionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('cat_generaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email',50)->unique();
-            $table->string('password',15);
-            $table->rememberToken();
-            $table->ipAddress('visitor');
-            $table->macAddress('device');
-            $table->unsignedTinyInteger('edo')->default(1);
+            $table->char('mes_ini',10)->nullable();
+            $table->smallInteger('anio_ini');
+            $table->char('mes_fin',10)->nullable();
+            $table->smallInteger('anio_fin');
+
             /*General datas*/
+            $table->unsignedTinyInteger('edo')->default(1);            
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();            
             $table->engine = 'InnoDB';
@@ -38,7 +37,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cat_generaciones');
     }
 }
-/*ALTER TABLE `users` CHANGE `updated_at` `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;*/

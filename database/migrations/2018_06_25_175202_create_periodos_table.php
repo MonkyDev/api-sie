@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreatePeriodosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('cat_periodos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email',50)->unique();
-            $table->string('password',15);
-            $table->rememberToken();
-            $table->ipAddress('visitor');
-            $table->macAddress('device');
-            $table->unsignedTinyInteger('edo')->default(1);
+            $table->string('desc_periodo');
+            $table->unsignedTinyInteger('meses_contemplados');
+            $table->unsignedTinyInteger('seriacion');
             /*General datas*/
+            $table->unsignedTinyInteger('edo')->default(1);            
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();            
             $table->engine = 'InnoDB';
@@ -38,7 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cat_periodos');
     }
 }
-/*ALTER TABLE `users` CHANGE `updated_at` `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;*/
